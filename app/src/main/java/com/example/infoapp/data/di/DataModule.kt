@@ -23,29 +23,37 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import com.example.infoapp.data.InfoRepository
-import com.example.infoapp.data.DefaultInfoRepository
+import com.example.infoapp.data.InfoRepositoryImpl
+import com.example.infoapp.data.datasource.local.database.InfoDao
+import com.example.infoapp.data.datasource.remote.ApiService
 import com.example.infoapp.data.models.UserInfo
+import dagger.Provides
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
-
+object DataModule {
     @Singleton
-    @Binds
-    fun bindsInfoRepository(
-        infoRepository: FakeInfoRepository
-    ): InfoRepository
+    @Provides
+    fun provideInfoRepository(apiService: ApiService, infoDao: InfoDao): InfoRepository{
+        return InfoRepositoryImpl(apiService, infoDao)
+    }
 
 }
 
 class FakeInfoRepository @Inject constructor() : InfoRepository {
     override val infos: Flow<List<UserInfo>> = flowOf(fakeInfos)
 
-    override suspend fun add(info: UserInfo) {
+    override suspend fun getUserInfoList() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun add(infoList: List<UserInfo>) {
         throw NotImplementedError()
     }
+
+
 }
 
 val fakeInfos = listOf(

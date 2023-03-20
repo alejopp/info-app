@@ -84,13 +84,14 @@ internal fun InfoScreen(
                 searchTextState = searchTextState,
                 onTextChange = { infoViewModel.updateSearchTextState(it) },
                 onCloseClicked = { infoViewModel.updateSearchWidgetState(SearchWidgetState.CLOSED) },
-                onSearchClicked = { Log.d("Search text", it) },
+                onSearchClicked = { infoViewModel.filterUserInfoList(it) },
                 onSearchTriggered = { infoViewModel.updateSearchWidgetState(SearchWidgetState.OPENED) }
             )
         }
     ) {
         LazyColumn(modifier = modifier.padding(it)) {
-            items(userInfoList) { userInfo ->
+            items(userInfoList.filter { it.userName.contains(searchTextState, ignoreCase = true)
+            }) { userInfo ->
                 InfoItem(
                     name = userInfo.name,
                     email = userInfo.email,

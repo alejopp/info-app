@@ -24,17 +24,17 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import com.example.infoapp.data.local.database.Info
-import com.example.infoapp.data.local.database.InfoDao
+import com.example.infoapp.data.datasource.local.database.InfoDao
 
 /**
- * Unit tests for [DefaultInfoRepository].
+ * Unit tests for [InfoRepositoryImpl].
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
 class DefaultInfoRepositoryTest {
 
     @Test
     fun infos_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultInfoRepository(FakeInfoDao())
+        val repository = InfoRepositoryImpl(FakeInfoDao())
 
         repository.add("Repository")
 

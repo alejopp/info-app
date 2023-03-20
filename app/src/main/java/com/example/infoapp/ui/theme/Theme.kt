@@ -39,11 +39,11 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Cyan,
+    primary = CyanApp,
     onPrimary = Color.White,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    surface = Cyan,
+    surface = CyanApp,
     onSurface = Color.White
 
     /* Other default colors to override

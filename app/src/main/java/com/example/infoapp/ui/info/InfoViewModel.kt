@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import com.example.infoapp.data.InfoRepository
-import com.example.infoapp.data.local.database.UserInfoEntity
 import com.example.infoapp.data.models.UserInfo
 import com.example.infoapp.ui.info.InfoUiState.Error
 import com.example.infoapp.ui.info.InfoUiState.Loading
@@ -41,6 +40,12 @@ import javax.inject.Inject
 class InfoViewModel @Inject constructor(
     private val infoRepository: InfoRepository
 ) : ViewModel() {
+
+    init {
+        viewModelScope.launch {
+            infoRepository.getUserInfoList()
+        }
+    }
 
     private val _searchWidgetState: MutableState<SearchWidgetState> =
         mutableStateOf(value = SearchWidgetState.CLOSED)
@@ -59,6 +64,9 @@ class InfoViewModel @Inject constructor(
     }
     fun updateSearchTextState(newValue: String) {
         _searchTextState.value = newValue
+    }
+    fun filterUserInfoList(name: String) {
+        
     }
 }
 

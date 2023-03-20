@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.infoapp.data.local.di
+package com.example.infoapp.data.di
 
 import android.content.Context
 import androidx.room.Room
@@ -23,8 +23,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import com.example.infoapp.data.local.database.AppDatabase
-import com.example.infoapp.data.local.database.InfoDao
+import com.example.infoapp.data.datasource.local.database.AppDatabase
+import com.example.infoapp.data.datasource.local.database.InfoDao
 import javax.inject.Singleton
 
 

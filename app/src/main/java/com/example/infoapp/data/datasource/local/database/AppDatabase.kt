@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.infoapp.ui.theme
+package com.example.infoapp.data.datasource.local.database
 
-import androidx.compose.ui.graphics.Color
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.example.infoapp.data.datasource.local.database.entities.UserInfoEntity
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
-val CyanApp = Color(0xFF07c0d4)
-
+@Database(entities = [UserInfoEntity::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun infoDao(): InfoDao
+}

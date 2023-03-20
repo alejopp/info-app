@@ -101,11 +101,15 @@ fun SearchAppBar(
 @Composable
 fun DefaultAppBar(title: String, onSearchClicked: () -> Unit) {
     TopAppBar(
+        colors = TopAppBarDefaults.largeTopAppBarColors(
+            MaterialTheme.colorScheme.onPrimary
+        ),
         title = {
             Text(
                 text = title,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onPrimary
             )
         },
         navigationIcon = {

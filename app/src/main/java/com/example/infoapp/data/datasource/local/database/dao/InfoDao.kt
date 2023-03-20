@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.infoapp.data.local.database
+package com.example.infoapp.data.datasource.local.database
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
+import androidx.room.Dao
+import androidx.room.Entity
+import androidx.room.Insert
+import androidx.room.PrimaryKey
+import androidx.room.Query
+import com.example.infoapp.data.datasource.local.database.entities.UserInfoEntity
+import kotlinx.coroutines.flow.Flow
 
-@Database(entities = [UserInfoEntity::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun infoDao(): InfoDao
+@Dao
+interface InfoDao {
+    @Query("SELECT * FROM info")
+    fun getInfoList(): Flow<List<UserInfoEntity>>
+
+    @Insert
+    suspend fun insertInfo(item: List<UserInfoEntity>)
 }
