@@ -23,4 +23,9 @@
     <string name="text_phone_number">Phone number</string>
     <string name="webpage_format">Webpage   %s</string>
     <string name="search_here">Search here</string>
+    <string name="close_icon">Close icon</string>
+    <string name="navigation_icon">Navigation icon</string>
+    <string name="search_icon">Search icon</string>
+    <string name="top_app_bar_title">Employees</string>
+    <string name="menu_icon">Menu icon</string>
 </resources>

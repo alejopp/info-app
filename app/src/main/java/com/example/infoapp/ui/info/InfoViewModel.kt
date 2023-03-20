@@ -16,6 +16,9 @@
 
 package com.example.infoapp.ui.info
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,6 +34,7 @@ import com.example.infoapp.data.models.UserInfo
 import com.example.infoapp.ui.info.InfoUiState.Error
 import com.example.infoapp.ui.info.InfoUiState.Loading
 import com.example.infoapp.ui.info.InfoUiState.Success
+import com.example.infoapp.utils.SearchWidgetState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,15 +42,23 @@ class InfoViewModel @Inject constructor(
     private val infoRepository: InfoRepository
 ) : ViewModel() {
 
+    private val _searchWidgetState: MutableState<SearchWidgetState> =
+        mutableStateOf(value = SearchWidgetState.CLOSED)
+    val searchWidgetState: State<SearchWidgetState> = _searchWidgetState
+
+    private val _searchTextState: MutableState<String> =
+        mutableStateOf(value = "")
+    val searchTextState: State<String> = _searchTextState
+
     val uiState: StateFlow<InfoUiState> = infoRepository
         .infos.map(::Success)
         .catch { Error(it) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
-
-    fun addInfo(info: UserInfo) {
-        viewModelScope.launch {
-            infoRepository.add(info)
-        }
+    fun updateSearchWidgetState(newValue: SearchWidgetState) {
+        _searchWidgetState.value = newValue
+    }
+    fun updateSearchTextState(newValue: String) {
+        _searchTextState.value = newValue
     }
 }
 
