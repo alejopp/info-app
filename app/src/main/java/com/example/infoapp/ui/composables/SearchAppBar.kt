@@ -51,7 +51,7 @@ fun SearchAppBar(
                 )
             },
             singleLine = true,
-            
+
         )
     }
 }
