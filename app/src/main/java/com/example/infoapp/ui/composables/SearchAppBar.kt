@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.infoapp.R
 import androidx.compose.ui.unit.dp
+import com.example.infoapp.ui.theme.CyanApp
 import com.example.infoapp.ui.theme.MyApplicationTheme
 
 
@@ -40,10 +41,11 @@ fun SearchAppBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(64.dp),
-        color = MaterialTheme.colorScheme.surface
+        color = MaterialTheme.colorScheme.primary
     ) {
         TextField(
             modifier = Modifier.fillMaxWidth(),
+            textStyle = MaterialTheme.typography.titleLarge,
             value = text,
             onValueChange = {
                 onTextChanged(it)
@@ -52,7 +54,8 @@ fun SearchAppBar(
                 Text(
                     modifier = Modifier.alpha(0.6f),
                     text = stringResource(id = R.string.search_here),
-                    color = Color.White
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleLarge
                 )
             },
             singleLine = true,
@@ -61,7 +64,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Filled.Menu,
                         contentDescription = stringResource(id = R.string.menu_icon),
-                        tint = MaterialTheme.colorScheme.onSurface
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             },
@@ -78,7 +81,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Filled.Close,
                         contentDescription = stringResource(id = R.string.close_icon),
-                        tint = MaterialTheme.colorScheme.onSurface
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             },
@@ -92,7 +95,8 @@ fun SearchAppBar(
             ),
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.Transparent,
-                cursorColor = Color.White.copy(alpha = 0.6f)
+                cursorColor = Color.White.copy(alpha = 0.6f),
+                textColor = MaterialTheme.colorScheme.onPrimary
             )
         )
     }
@@ -101,9 +105,6 @@ fun SearchAppBar(
 @Composable
 fun DefaultAppBar(title: String, onSearchClicked: () -> Unit) {
     TopAppBar(
-        colors = TopAppBarDefaults.largeTopAppBarColors(
-            MaterialTheme.colorScheme.onPrimary
-        ),
         title = {
             Text(
                 text = title,
@@ -116,7 +117,8 @@ fun DefaultAppBar(title: String, onSearchClicked: () -> Unit) {
             IconButton(onClick = { /* doSomething() */ }) {
                 Icon(
                     imageVector = Icons.Filled.Menu,
-                    contentDescription = stringResource(id = R.string.navigation_icon)
+                    contentDescription = stringResource(id = R.string.navigation_icon),
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         },
@@ -124,10 +126,14 @@ fun DefaultAppBar(title: String, onSearchClicked: () -> Unit) {
             IconButton(onClick = { onSearchClicked() }) {
                 Icon(
                     imageVector = Icons.Filled.Search,
-                    contentDescription = stringResource(id = R.string.search_icon)
+                    contentDescription = stringResource(id = R.string.search_icon),
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        )
     )
 }
 
